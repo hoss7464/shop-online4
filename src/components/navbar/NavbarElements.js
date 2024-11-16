@@ -155,14 +155,14 @@ export const NavbarLinkIconWrapper = styled.div`
   margin-right: 1rem;
   cursor: pointer;
   border: solid 3px ${colors.prime1};
-  padding: 0.6rem;
+  padding: 0.5rem;
   &:hover {
     background-color: ${colors.sec1};
   }
 `;
 export const NavbarIcon = styled.img`
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 `;
 
 export const SignInUpWrapper = styled.div`
@@ -264,9 +264,6 @@ export const HamburgerWrapper2 = styled.div`
   cursor: pointer;
   border: solid 3px ${colors.prime1};
   padding: 0.6rem;
-  &:hover {
-    background-color: ${colors.sec1};
-  }
 `;
 export const HamburgerIcon = styled(HiMenu)`
   width: 20px;

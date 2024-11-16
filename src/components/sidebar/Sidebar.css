@@ -1,0 +1,18 @@
+.sidebar {
+  opacity: 0;
+  top: -100%;
+  transition: 0.3s ease-in-out;
+  background: rgba(226, 232, 247, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.sidebar.open {
+  opacity: 100%;
+  top: 0;
+}
+
+.active-color {
+  background-color: #0067FF;
+  transition: all 0.2s ease-in-out;
+  color: #fff;
+}

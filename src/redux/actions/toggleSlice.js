@@ -3,12 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 export const toggleSlice = createSlice({
   name: "toggle",
   initialState: {
-    toggles: {},
+    toggles: {
+      sidebar: false,
+    },
   },
   reducers: {
     clickToggle: (state, action) => {
-      const id = action.payload
-      state.toggles[id] = !state.toggles[id]
+      const toggleKey = action.payload;
+      state.toggles[toggleKey] = !state.toggles[toggleKey];
     },
     hoverEnableToggle : (state, action) => {
       const id = action.payload

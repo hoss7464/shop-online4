@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   hoverEnableToggle,
   hoverDisableToggle,
+  clickToggle,
 } from "../../redux/actions/toggleSlice";
 import {
   NavbarContainer,
@@ -40,6 +41,7 @@ import myPurchase1 from "../../assets/svg/Purchase1.svg";
 import myPurchase2 from "../../assets/svg/Purchase2.svg";
 import myCategory1 from "../../assets/svg/Category1.svg";
 import myCategory2 from "../../assets/svg/Category2.svg";
+import Tooltip from "@mui/material/Tooltip";
 
 const Navbar = () => {
   //Selectors for toggle click :
@@ -75,39 +77,45 @@ const Navbar = () => {
           <NavbarRightSection>
             <LinkWrpper1>
               <Navlink to="/">
-                <NavbarLinkIconWrapper
-                  onMouseEnter={() => HoverMouseEnter("toggle1")}
-                  onMouseLeave={() => HoverMouseLeave("toggle1")}
-                >
-                  <NavbarIcon
-                    alt="home icon"
-                    src={toggles["toggle1"] ? myHome2 : myHome1}
-                  />
-                </NavbarLinkIconWrapper>
+                <Tooltip title="Home" placement="bottom">
+                  <NavbarLinkIconWrapper
+                    onMouseEnter={() => HoverMouseEnter("toggle1")}
+                    onMouseLeave={() => HoverMouseLeave("toggle1")}
+                  >
+                    <NavbarIcon
+                      alt="home icon"
+                      src={toggles["toggle1"] ? myHome2 : myHome1}
+                    />
+                  </NavbarLinkIconWrapper>
+                </Tooltip>
               </Navlink>
 
               <Navlink to="/purchase">
-                <NavbarLinkIconWrapper
-                  onMouseEnter={() => HoverMouseEnter("toggle2")}
-                  onMouseLeave={() => HoverMouseLeave("toggle2")}
-                >
-                  <NavbarIcon
-                    alt="purchase icon"
-                    src={toggles["toggle2"] ? myPurchase2 : myPurchase1}
-                  />
-                </NavbarLinkIconWrapper>
+                <Tooltip title="Purchase" placement="bottom">
+                  <NavbarLinkIconWrapper
+                    onMouseEnter={() => HoverMouseEnter("toggle2")}
+                    onMouseLeave={() => HoverMouseLeave("toggle2")}
+                  >
+                    <NavbarIcon
+                      alt="purchase icon"
+                      src={toggles["toggle2"] ? myPurchase2 : myPurchase1}
+                    />
+                  </NavbarLinkIconWrapper>
+                </Tooltip>
               </Navlink>
 
               <Navlink>
-                <NavbarLinkIconWrapper
-                  onMouseEnter={() => HoverMouseEnter("toggle3")}
-                  onMouseLeave={() => HoverMouseLeave("toggle3")}
-                >
-                  <NavbarIcon
-                    alt="category icon"
-                    src={toggles["toggle3"] ? myCategory2 : myCategory1}
-                  />
-                </NavbarLinkIconWrapper>
+                <Tooltip title="Category" placement="bottom">
+                  <NavbarLinkIconWrapper
+                    onMouseEnter={() => HoverMouseEnter("toggle3")}
+                    onMouseLeave={() => HoverMouseLeave("toggle3")}
+                  >
+                    <NavbarIcon
+                      alt="category icon"
+                      src={toggles["toggle3"] ? myCategory2 : myCategory1}
+                    />
+                  </NavbarLinkIconWrapper>
+                </Tooltip>
               </Navlink>
             </LinkWrpper1>
 
@@ -135,18 +143,9 @@ const Navbar = () => {
               </SignInUpLink>
             </SignInUpWrapper>
 
-            <HamburgerWrapper1>
-              <HamburgerWrapper2
-                onMouseEnter={() => HoverMouseEnter("toggle4")}
-                onMouseLeave={() => HoverMouseLeave("toggle4")}
-              >
-                <HamburgerIcon
-                  style={
-                    toggles["toggle4"]
-                      ? { color: "#fdfdfd" }
-                      : { color: "#000000" }
-                  }
-                />
+            <HamburgerWrapper1 onClick={() => dispatch(clickToggle("sidebar"))}>
+              <HamburgerWrapper2>
+                <HamburgerIcon />
               </HamburgerWrapper2>
             </HamburgerWrapper1>
           </NavbarRightSection>
