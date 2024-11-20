@@ -24,17 +24,21 @@ import {
   RegisterErrorWrapper,
   RegisterError,
 } from "../signup/SignupElements";
+//---------------------------------------------------------------------------------------------------------
 
 const Signin = () => {
+  //Selectors :
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.change);
   const emailError = useSelector((state) => state.emailValidation.signinEmailError);
-
-  const handleChangeFunc = (e) => {
+  //---------------------------------------------------------------------------------------------------------
+  //Email validation : 
+  const handleEmailChange = (e) => {
     const value = e.target.value;
     dispatch(handleChange({ formName: "signin", name: "email", value }));
     dispatch(validateSigninEmail(value));
   };
+  //---------------------------------------------------------------------------------------------------------
   return (
     <>
       <SigninContainer>
@@ -44,7 +48,7 @@ const Signin = () => {
               <SignupHeaderWrapper>
                 <SignupHeader>Sign In</SignupHeader>
               </SignupHeaderWrapper>
-
+              
               <RegisterInputLabelWrapper>
                 <RegisterLabelWrapper>
                   <RegisterInputLabel>Email</RegisterInputLabel>
@@ -59,7 +63,7 @@ const Signin = () => {
                       type="email"
                       name="email"
                       value={formData.signin.email}
-                      onChange={handleChangeFunc}
+                      onChange={handleEmailChange}
                     />
                   </RegisterInputWrapper>
                 </RegisterInputIconWrapper>

@@ -21,19 +21,22 @@ import {
   RegisterErrorWrapper,
   RegisterError,
 } from "../signup/SignupElements";
+//-------------------------------------------------------------------------------------------------
 
 const ForgotPassword = () => {
+  //Selectors : 
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.change);
-  const emailError = useSelector(
-    (state) => state.emailValidation.forgotPasswordEmailError
-  );
-
+  const emailError = useSelector((state) => state.emailValidation.forgotPasswordEmailError);
+  //-------------------------------------------------------------------------------------------------
+  //Email validation : 
   const handleEmailChange = (e) => {
     const value = e.target.value;
     dispatch(handleChange({ formName: "forgotPassword", name: "email", value }));
     dispatch(validateForgotPasswordEmail(value));
   };
+  //-------------------------------------------------------------------------------------------------
+  
   return (
     <>
       <SigninContainer>

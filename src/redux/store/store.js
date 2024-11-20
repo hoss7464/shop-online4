@@ -5,6 +5,7 @@ import emailValidationReducer from "../actions/form/emailValidationSlice";
 import usernameValidationReducer from "../actions/form/usernameValidationSlice"
 import phoneValidationReducr from "../actions/form/phoneValidationSlice"
 import passwordValidationReducer from "../actions/form/passwordValidationSlice"
+//----------------------------------------------------------------------------------------------
 
 export const store = configureStore({
   reducer: {

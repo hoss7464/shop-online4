@@ -42,8 +42,10 @@ import {
   RegisterError,
 } from "./SignupElements";
 import PasswordStrengthBar from "react-password-strength-bar"
+//-------------------------------------------------------------------------------------------------------------
 
 const Signup = () => {
+  //Selectors :
   const dispatch = useDispatch();
   const toggles = useSelector((state) => state.toggle.toggles);
   const formData = useSelector((state) => state.change);
@@ -52,18 +54,22 @@ const Signup = () => {
   const phoneError = useSelector((state) => state.phoneValidation.signupPhoneError);
   const passwordError = useSelector((state) => state.passwordValidation.signupPasswordValidation)
   const confirmPasswordError = useSelector((state) => state.passwordValidation.signupConfirmPasswordValidation)
+  //-------------------------------------------------------------------------------------------------------------
+  //Email validation :
   const handleEmailChange = (e) => {
     const value = e.target.value;
     dispatch(handleChange({ formName: "signup", name: "email", value }));
     dispatch(validateSignupEmail(value));
   };
-
+  //-------------------------------------------------------------------------------------------------------------
+  //Username validation :
   const handleUsernameChange = (e) => {
     const value = e.target.value;
     dispatch(handleChange({ formName: "signup", name: "fullname", value }));
     dispatch(validateSignupUsername(value));
   };
-
+  //-------------------------------------------------------------------------------------------------------------
+  //Password & confirm password validation :
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     dispatch(handleChange({ formName: "signup", name: "password", value }));
@@ -76,7 +82,8 @@ const Signup = () => {
     dispatch(handleChange({ formName: "signup", name: "confirmPassword", value: confirmPassword }));
     dispatch(validateSignupConfirmPassword({ password, confirmPassword }));
   };
-
+  //-------------------------------------------------------------------------------------------------------------
+  
   return (
     <>
       <RegisterContainer>

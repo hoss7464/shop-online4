@@ -42,11 +42,13 @@ import myPurchase2 from "../../assets/svg/Purchase2.svg";
 import myCategory1 from "../../assets/svg/Category1.svg";
 import myCategory2 from "../../assets/svg/Category2.svg";
 import Tooltip from "@mui/material/Tooltip";
+//----------------------------------------------------------------------------------------------
 
 const Navbar = () => {
   //Selectors for toggle click :
+  const dispatch = useDispatch();
   const toggles = useSelector((state) => state.toggle.toggles);
-  //--------------------------------------------------------
+  //----------------------------------------------------------------------------------------------
   //Hover function :
   const HoverMouseEnter = (id) => {
     dispatch(hoverEnableToggle(id));
@@ -54,9 +56,8 @@ const Navbar = () => {
   const HoverMouseLeave = (id) => {
     dispatch(hoverDisableToggle(id));
   };
-  //--------------------------------------------------------
-  const dispatch = useDispatch();
-  //--------------------------------------------------------
+  //----------------------------------------------------------------------------------------------
+
   return (
     <>
       <NavbarContainer>

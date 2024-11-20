@@ -9,19 +9,19 @@ import {
   SideLinkContainer,
   SideLink,
 } from "./Sidebar";
+//------------------------------------------------------------------------------------------------------
 
 const Sidebar = () => {
   const Location = useLocation();
+  //Selectors : 
   const dispatch = useDispatch();
-  //--------------------------------------------------------
-  const isOpen = useSelector(
-    (state) => state.toggle.toggles["sidebar"] || false
-  );
-  //--------------------------------------------------------
+  const isOpen = useSelector((state) => state.toggle.toggles["sidebar"] || false);
+  //------------------------------------------------------------------------------------------------------
+  //Toggle function :
   const handleToggle = () => {
     dispatch(clickToggle("sidebar"));
   };
-  //--------------------------------------------------------
+  //------------------------------------------------------------------------------------------------------
 
   return (
     <>

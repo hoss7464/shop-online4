@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+//----------------------------------------------------------------------------------------------
+//States : 
 const initialState = {
   signup: {
     fullname: "",
@@ -20,15 +21,18 @@ const initialState = {
     confirmPassword: "",
   }
 };
+//----------------------------------------------------------------------------------------------
 
 export const changeSlice = createSlice({
   name: "change",
   initialState,
   reducers: {
+    //onchange function for inputs :
     handleChange: (state, action) => {
       const { formName, name, value } = action.payload;
       state[formName][name] = value;
     },
+    //onchange function for phone input :
     handlePhoneChange: (state, action) => {
       state.phone = action.payload;
     },

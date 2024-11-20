@@ -30,15 +30,17 @@ import {
   RegisterError
 } from "../signup/SignupElements";
 import PasswordStrengthBar from "react-password-strength-bar";
-
+//-------------------------------------------------------------------------------------------------------------------
 
 const RetrievePassword = () => {
+  //Selectors : 
   const dispatch = useDispatch();
   const toggles = useSelector((state) => state.toggle.toggles);
   const formData = useSelector((state) => state.change);
   const passwordError = useSelector((state) => state.passwordValidation.retrievePasswordValidation);
   const confirmPasswordError = useSelector((state) => state.passwordValidation.retrieveConfirmPasswordValidation);
-
+  //-------------------------------------------------------------------------------------------------------------------
+  //Passwor and confirm password validation : 
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     dispatch(handleChange({ formName: "retrievePassword", name: "password", value }));
@@ -51,6 +53,7 @@ const RetrievePassword = () => {
     dispatch(handleChange({formName: "retrievePassword",name: "confirmPassword",value: confirmPassword,}));
     dispatch(validateRetrieveConfirmPassword({ password, confirmPassword }));
   };
+  //-------------------------------------------------------------------------------------------------------------------
 
   return (
     <>
