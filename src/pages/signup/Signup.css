@@ -1,0 +1,55 @@
+.phone-input-container {
+  border: none;
+  outline: none;
+  background-color: inherit;
+}
+
+.react-tel-input .form-control {
+  width: 325px;
+  border-radius: 8px;
+  font-size: 14px;
+  padding-left: 3rem;
+  background-color: inherit;
+  border: none;
+  outline: none;
+}
+
+.react-tel-input .flag-dropdown {
+  background-color: inherit;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+.react-tel-input .country-list {
+  background-color: #efefef;
+}
+
+.react-tel-input .country-list .country {
+  background-color: inherit;
+  padding: 10px;
+}
+
+.react-tel-input .country-list .country:hover {
+  background-color: #e6e6e6;
+}
+
+@media only screen and (min-width: 280px) and (max-width: 576px) {
+  .react-tel-input .form-control {
+    width: 220px;
+    height: 26px;
+  }
+}
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .react-tel-input .form-control {
+    width: 250px;
+    height: 30px;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .react-tel-input .form-control {
+    width: 327px;
+    height: 34px;
+  }
+}

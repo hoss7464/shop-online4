@@ -120,7 +120,7 @@ const Navbar = () => {
             </LinkWrpper1>
 
             <SignInUpWrapper>
-              <SignInUpLink to="/login" style={{ marginRight: "1rem" }}>
+              <SignInUpLink to="/signin" style={{ marginRight: "1rem" }}>
                 <SignInWrapper>
                   <SignInTextWrapper>
                     <SignInText>Log In</SignInText>

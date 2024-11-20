@@ -37,20 +37,19 @@ export const SideLinkContainer = styled.ul`
   flex-direction:column ;
   width: 100%;
   padding-top:0.5rem ;
-  padding-bottom:1rem ;
+  padding-bottom:0.5rem ;
 `;
 
 export const SideLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top:0.5rem ;
-  padding-bottom:0.5rem ;
+
   cursor: pointer;
   font-size:16px ;
-  margin-top:1rem ;
+  margin-top:0.5rem ;
   border-radius:8px ;
   color: ${colors.text1};
-  padding: 16px 32px;
-  font-weight: 400;
+  padding: 12px 26px;
+  font-weight: 600;
 `;
