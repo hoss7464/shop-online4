@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 //---------------------------------------------------------------------------------------------------
-//States : 
+//States :
 const initialState = {
   signupPasswordValidation: "",
   retrievePasswordValidation: "",
   signupConfirmPasswordValidation: "",
   retrieveConfirmPasswordValidation: "",
+  signinPasswordValidation: ""
 };
 //---------------------------------------------------------------------------------------------------
 //Main function for password valiation :
 const validatePassword = (password) => {
-  if (password.trim() === "") return true;
   const passwordRegx = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
   return passwordRegx.test(password);
 };
@@ -20,39 +20,49 @@ export const passwordValidationSlice = createSlice({
   name: "passwordValidation",
   initialState,
   reducers: {
-    //Validation for sign up password : 
+    //Validation for sign up password :
     validateSignupPassword: (state, action) => {
-      const isValid = validatePassword(action.payload);
-      state.signupPasswordValidation = isValid
-        ? ""
-        : "at least 8 char : at least has char, num";
+      const password = action.payload.trim();
+      if (password === "") {
+        state.signupPasswordValidation = "Password is required.";
+      } else {
+        const isValid = validatePassword(password);
+        state.signupPasswordValidation = isValid
+          ? ""
+          : "at least 8 char : at least has char, num";
+      }
     },
-    //Validation for retrieve password : 
+    //Validation for retrieve password :
     validateRetrievePassword: (state, action) => {
-      const isValid = validatePassword(action.payload);
-      state.retrievePasswordValidation = isValid
-        ? ""
-        : "at least 8 char : at least has char, num";
+      const password = action.payload.trim();
+      if (password === "") {
+        state.retrievePasswordValidation = "Password is required.";
+      } else {
+        const isValid = validatePassword(password);
+        state.retrievePasswordValidation = isValid
+          ? ""
+          : "at least 8 char : at least has char, num";
+      }
     },
-    //Validation for sign up confirm password : 
+    //Validation for sign up confirm password :
     validateSignupConfirmPassword: (state, action) => {
       const { password, confirmPassword } = action.payload;
       state.signupConfirmPasswordValidation =
         password === confirmPassword ? "" : "Password doesn't match.";
     },
-    //Validation for retrieve confirm password : 
+    //Validation for retrieve confirm password :
     validateRetrieveConfirmPassword: (state, action) => {
       const { password, confirmPassword } = action.payload;
       state.retrieveConfirmPasswordValidation =
         password === confirmPassword ? "" : "Password doesn't match.";
     },
-    //To clear the states : 
-    clearValidationErrors: (state) => {
-      state.signupPasswordValidation = "";
-      state.retrievePasswordValidation = "";
-      state.signupConfirmPasswordValidation = "";
-      state.retrieveConfirmPasswordValidation = "";
-    },
+    validateSigninPassword : (state, action) => {
+      const password = action.payload.trim()
+      if (password === "") {
+        state.signinPasswordValidation = "Password is required."
+      }
+    }
+    
   },
 });
 
@@ -61,7 +71,7 @@ export const {
   validateRetrievePassword,
   validateSignupConfirmPassword,
   validateRetrieveConfirmPassword,
-  clearValidationErrors,
+  validateSigninPassword
 } = passwordValidationSlice.actions;
 
 export default passwordValidationSlice.reducer;

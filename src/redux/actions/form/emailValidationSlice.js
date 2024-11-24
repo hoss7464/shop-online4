@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 //------------------------------------------------------------------------------------------------
-//States : 
+//States :
 const initialState = {
   signupEmailError: "",
   signinEmailError: "",
   forgotPasswordEmailError: "",
 };
 //------------------------------------------------------------------------------------------------
-//Main email validation function 
+//Main email validation function
 const validateEmail = (email) => {
   if (email.trim() === "") return true;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -19,26 +19,35 @@ const emailValidationSlice = createSlice({
   name: "emailValidation",
   initialState,
   reducers: {
-    //validation for sign up email : 
+    //validation for sign up email :
     validateSignupEmail: (state, action) => {
-      const isValid = validateEmail(action.payload);
-      state.signupEmailError = isValid ? "" : "Invalid Email Format";
+      const email = action.payload.trim();
+      if (email === "") {
+        state.signupEmailError = "Email is required.";
+      } else {
+        const isValid = validateEmail(email);
+        state.signupEmailError = isValid ? "" : "Invalid email format.";
+      }
     },
-    //validation for sign in email : 
+    //validation for sign in email :
     validateSigninEmail: (state, action) => {
-      const isValid = validateEmail(action.payload);
-      state.signinEmailError = isValid ? "" : "Invalid Email Format";
+      const email = action.payload.trim();
+      if (email === "") {
+        state.signinEmailError = "Email is required.";
+      } else {
+        const isValid = validateEmail(email);
+        state.signinEmailError = isValid ? "" : "Invalid email format.";
+      }
     },
-    //validation for forgotPassword email : 
+    //validation for forgotPassword email :
     validateForgotPasswordEmail: (state, action) => {
-      const isValid = validateEmail(action.payload);
-      state.forgotPasswordEmailError = isValid ? "" : "Invalid Email Format";
-    },
-    //To clear the states :
-    clearValidationErrors: (state) => {
-      state.signupEmailError = "";
-      state.signinEmailError = "";
-      state.forgotPasswordEmailError = "";
+      const email = action.payload.trim();
+      if (email === "") {
+        state.forgotPasswordEmailError = "Email is required.";
+      } else {
+        const isValid = validateEmail(email);
+        state.forgotPasswordEmailError = isValid ? "" : "Invalid email format.";
+      }
     },
   },
 });
@@ -47,7 +56,6 @@ export const {
   validateSignupEmail,
   validateSigninEmail,
   validateForgotPasswordEmail,
-  clearValidationErrors,
 } = emailValidationSlice.actions;
 
 export default emailValidationSlice.reducer;

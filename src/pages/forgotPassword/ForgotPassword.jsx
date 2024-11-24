@@ -1,7 +1,7 @@
 import React from "react";
 import { SigninContainer, SigninWrapper } from "../signin/SigninElements";
 import { useSelector, useDispatch } from "react-redux";
-import { handleChange } from "../../redux/actions/form/changeSlice";
+import { handleChange, resetForgotPsswordForm } from "../../redux/actions/form/changeSlice";
 import { validateForgotPasswordEmail } from "../../redux/actions/form/emailValidationSlice";
 import {
   RegisterFormWrapper,
@@ -36,13 +36,33 @@ const ForgotPassword = () => {
     dispatch(validateForgotPasswordEmail(value));
   };
   //-------------------------------------------------------------------------------------------------
+  //Submit function : 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const email = formData.forgotPassword.email;
+    dispatch(validateForgotPasswordEmail(email))
+    const isEmailRequired = emailError || email.trim() === ""
+
+    if (isEmailRequired) {
+      return
+    }
+
+    const submitData = {
+      email 
+    }
+
+    console.log(submitData)
+
+    dispatch(resetForgotPsswordForm())
+  }
   
   return (
     <>
       <SigninContainer>
         <SigninWrapper>
           <RegisterFormWrapper>
-            <RegisterForm onSubmit={(e) => e.preventDefault()}>
+            <RegisterForm onSubmit={handleSubmit}>
               <SignupHeaderWrapper>
                 <SignupHeader>Forgot Password</SignupHeader>
               </SignupHeaderWrapper>

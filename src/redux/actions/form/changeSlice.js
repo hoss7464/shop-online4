@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 //----------------------------------------------------------------------------------------------
-//States : 
+//States :
 const initialState = {
   signup: {
     fullname: "",
@@ -16,10 +16,10 @@ const initialState = {
   forgotPassword: {
     email: "",
   },
-  retrievePassword : {
+  retrievePassword: {
     password: "",
     confirmPassword: "",
-  }
+  },
 };
 //----------------------------------------------------------------------------------------------
 
@@ -34,11 +34,51 @@ export const changeSlice = createSlice({
     },
     //onchange function for phone input :
     handlePhoneChange: (state, action) => {
-      state.phone = action.payload;
+      const phoneValue = action.payload.trim();
+      state.signup.phone = phoneValue.startsWith("+")
+        ? phoneValue
+        : `+${phoneValue}`;
+    },
+    //reset signup fields :
+    resetSignupForm: (state) => {
+      state.signup = {
+        email: "",
+        fullname: "",
+        phone: "",
+        password: "",
+        confirmPassword: "",
+      };
+    },
+    //reset sign in fields :
+    resetSigninForm: (state) => {
+      state.signin = {
+        email: "",
+        password: "",
+      };
+    },
+    //reset forgot password field :
+    resetForgotPsswordForm: (state) => {
+      state.forgotPassword = {
+        email: "",
+      };
+    },
+    //reset retrieve password fields:
+    resetRetievePasswordForm: (state) => {
+      state.retrievePassword = {
+        password: "",
+        confirmPassword: "",
+      };
     },
   },
 });
 
-export const { handleChange, handlePhoneChange } = changeSlice.actions;
+export const {
+  handleChange,
+  handlePhoneChange,
+  resetSignupForm,
+  resetSigninForm,
+  resetForgotPsswordForm,
+  resetRetievePasswordForm
+} = changeSlice.actions;
 
 export default changeSlice.reducer;

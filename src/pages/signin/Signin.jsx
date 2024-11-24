@@ -1,8 +1,9 @@
 import React from "react";
 import { SigninContainer, SigninWrapper } from "./SigninElements";
 import { useSelector, useDispatch } from "react-redux";
-import { handleChange } from "../../redux/actions/form/changeSlice";
+import { handleChange, resetSigninForm } from "../../redux/actions/form/changeSlice";
 import { validateSigninEmail } from "../../redux/actions/form/emailValidationSlice";
+import { validateSigninPassword } from "../../redux/actions/form/passwordValidationSlice";
 import {
   RegisterFormWrapper,
   RegisterForm,
@@ -31,6 +32,7 @@ const Signin = () => {
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.change);
   const emailError = useSelector((state) => state.emailValidation.signinEmailError);
+  const passwordError = useSelector((state) => state.passwordValidation.signinPasswordValidation)
   //---------------------------------------------------------------------------------------------------------
   //Email validation : 
   const handleEmailChange = (e) => {
@@ -38,13 +40,52 @@ const Signin = () => {
     dispatch(handleChange({ formName: "signin", name: "email", value }));
     dispatch(validateSigninEmail(value));
   };
+  //--------------------------------------------------------------------------------------------------------
+  //Sign in validation : 
+  const handleSigninChange = (e) => {
+    const value = e.target.value 
+    dispatch(handleChange({ formName: "signin", name: "password", value }));
+    dispatch(validateSigninPassword(value))
+  }
   //---------------------------------------------------------------------------------------------------------
+  //Submit function :
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  
+    const email = formData.signin.email;
+    const password = formData.signin.password;
+  
+    
+    dispatch(validateSigninEmail(email));
+    dispatch(validateSigninPassword(password));
+  
+    
+    const isEmailRequired = emailError || email.trim() === "";
+    const isPasswordRequired = passwordError || password.trim() === "";
+  
+    
+    if (isEmailRequired || isPasswordRequired) {
+      return;
+    }
+  
+    
+    const submitData = {
+      email,
+      password,
+    };
+  
+    console.log(submitData);
+  
+    
+    dispatch(resetSigninForm());
+  };
+  
   return (
     <>
       <SigninContainer>
         <SigninWrapper>
           <RegisterFormWrapper>
-            <RegisterForm onSubmit={(e) => e.preventDefault()}>
+            <RegisterForm onSubmit={handleSubmit}>
               <SignupHeaderWrapper>
                 <SignupHeader>Sign In</SignupHeader>
               </SignupHeaderWrapper>
@@ -88,18 +129,15 @@ const Signin = () => {
                       type="password"
                       name="password"
                       value={formData.signin.password}
-                      onChange={(e) =>
-                        dispatch(
-                          handleChange({
-                            formName: "signin",
-                            name: e.target.name,
-                            value: e.target.value,
-                          })
-                        )
-                      }
+                      onChange={handleSigninChange}
                     />
                   </RegisterInputWrapper>
                 </RegisterInputIconWrapper>
+                {passwordError && (
+                  <RegisterErrorWrapper>
+                    <RegisterError>{passwordError}</RegisterError>
+                  </RegisterErrorWrapper>
+                )}
               </RegisterInputLabelWrapper>
 
               <RegisterSubmitBtnWrapper>

@@ -7,10 +7,14 @@ import { clickToggle } from "../../redux/actions/toggleSlice";
 import { validateSignupEmail } from "../../redux/actions/form/emailValidationSlice";
 import { validateSignupUsername } from "../../redux/actions/form/usernameValidationSlice";
 import { validateSignupPhone } from "../../redux/actions/form/phoneValidationSlice";
-import { validateSignupPassword, validateSignupConfirmPassword} from "../../redux/actions/form/passwordValidationSlice";
+import {
+  validateSignupPassword,
+  validateSignupConfirmPassword,
+} from "../../redux/actions/form/passwordValidationSlice";
 import {
   handleChange,
   handlePhoneChange,
+  resetSignupForm
 } from "../../redux/actions/form/changeSlice";
 import {
   RegisterContainer,
@@ -41,7 +45,7 @@ import {
   RegisterErrorWrapper,
   RegisterError,
 } from "./SignupElements";
-import PasswordStrengthBar from "react-password-strength-bar"
+import PasswordStrengthBar from "react-password-strength-bar";
 //-------------------------------------------------------------------------------------------------------------
 
 const Signup = () => {
@@ -49,11 +53,21 @@ const Signup = () => {
   const dispatch = useDispatch();
   const toggles = useSelector((state) => state.toggle.toggles);
   const formData = useSelector((state) => state.change);
-  const emailError = useSelector((state) => state.emailValidation.signupEmailError);
-  const usernameError = useSelector((state) => state.usernameValidation.signupUsernameError);
-  const phoneError = useSelector((state) => state.phoneValidation.signupPhoneError);
-  const passwordError = useSelector((state) => state.passwordValidation.signupPasswordValidation)
-  const confirmPasswordError = useSelector((state) => state.passwordValidation.signupConfirmPasswordValidation)
+  const emailError = useSelector(
+    (state) => state.emailValidation.signupEmailError
+  );
+  const usernameError = useSelector(
+    (state) => state.usernameValidation.signupUsernameError
+  );
+  const phoneError = useSelector(
+    (state) => state.phoneValidation.signupPhoneError
+  );
+  const passwordError = useSelector(
+    (state) => state.passwordValidation.signupPasswordValidation
+  );
+  const confirmPasswordError = useSelector(
+    (state) => state.passwordValidation.signupConfirmPasswordValidation
+  );
   //-------------------------------------------------------------------------------------------------------------
   //Email validation :
   const handleEmailChange = (e) => {
@@ -79,23 +93,66 @@ const Signup = () => {
   const handleConfirmPasswordChange = (e) => {
     const confirmPassword = e.target.value;
     const password = formData.signup.password;
-    dispatch(handleChange({ formName: "signup", name: "confirmPassword", value: confirmPassword }));
+    dispatch(
+      handleChange({
+        formName: "signup",
+        name: "confirmPassword",
+        value: confirmPassword,
+      })
+    );
     dispatch(validateSignupConfirmPassword({ password, confirmPassword }));
   };
   //-------------------------------------------------------------------------------------------------------------
-  
+  //Submit function :
+  const handleSubmit = (e) => {
+    e.preventDefault();
+   
+    const username = formData.signup.fullname
+    const email = formData.signup.email
+    const phone = formData.signup.phone
+    const Password = formData.signup.password
+    const confirmPassword = formData.signup.confirmPassword
+
+    dispatch(validateSignupUsername(username))
+    dispatch(validateSignupEmail(email))
+    dispatch(validateSignupPhone(phone))
+    dispatch(validateSignupPassword(Password))
+    dispatch(validateSignupConfirmPassword(confirmPassword))
+
+    const isUsernameRequired = usernameError || username.trim() === ""
+    const isEmailRequired = emailError || email.trim() === ""
+    const isPhoneRequired = phoneError || phone.trim() === ""
+    const isPasswordRequired = passwordError || Password.trim() === ""
+    const isConfirmPasswordRequired = confirmPasswordError || confirmPassword.trim() === ""
+    
+    if (isUsernameRequired || isEmailRequired || isPhoneRequired || isPasswordRequired || isConfirmPasswordRequired ) {
+      return
+    }
+    
+    const submitData = {
+      fullname: formData.signup.fullname,
+      email: formData.signup.email,
+      phone: formData.signup.phone,
+      password: formData.signup.password,
+      confirmPassword: formData.signup.confirmPassword,
+    };
+    
+    console.log(submitData)
+    dispatch(resetSignupForm())
+  };
+
   return (
     <>
       <RegisterContainer>
         <RegisterWrapper>
           <RegisterFormWrapper>
-            <RegisterForm onSubmit={(e) => e.preventDefault()}>
+            <RegisterForm onSubmit={handleSubmit}>
               <SignupHeaderWrapper>
                 <SignupHeader>Registration</SignupHeader>
               </SignupHeaderWrapper>
               <RegisterInputLabelWrapper>
                 <RegisterLabelWrapper>
-                  <RegisterInputLabel>Username</RegisterInputLabel>
+                  <RegisterInputLabel htmlFor="username" >Username</RegisterInputLabel>
                 </RegisterLabelWrapper>
                 <RegisterInputIconWrapper>
                   <RegisterIconWrapper>
@@ -120,7 +177,7 @@ const Signup = () => {
 
               <RegisterInputLabelWrapper>
                 <RegisterLabelWrapper>
-                  <RegisterInputLabel>Email</RegisterInputLabel>
+                  <RegisterInputLabel htmlFor="email" >Email</RegisterInputLabel>
                 </RegisterLabelWrapper>
                 <RegisterInputIconWrapper>
                   <RegisterIconWrapper>
@@ -145,7 +202,7 @@ const Signup = () => {
 
               <RegisterInputLabelWrapper>
                 <RegisterLabelWrapper>
-                  <RegisterInputLabel>Phone</RegisterInputLabel>
+                  <RegisterInputLabel htmlFor="phone" >Phone</RegisterInputLabel>
                 </RegisterLabelWrapper>
                 <RegisterInputIconWrapper>
                   <RegisterIconWrapper>
@@ -154,7 +211,7 @@ const Signup = () => {
                   <RegisterInputWrapper>
                     <PhoneInput
                       country={"us"}
-                      value={formData.phone}
+                      value={formData.signup.phone}
                       containerClass="phone-input-container"
                       onChange={(phone) => {
                         dispatch(handlePhoneChange(phone));
@@ -172,7 +229,7 @@ const Signup = () => {
 
               <RegisterInputLabelWrapper>
                 <RegisterLabelWrapper>
-                  <RegisterInputLabel>Password</RegisterInputLabel>
+                  <RegisterInputLabel htmlFor="password" >Password</RegisterInputLabel>
                 </RegisterLabelWrapper>
                 <RegisterInputIconWrapper>
                   <RegisterIconWrapper>
@@ -212,7 +269,7 @@ const Signup = () => {
 
               <RegisterInputLabelWrapper>
                 <RegisterLabelWrapper>
-                  <RegisterInputLabel>Confirm Password</RegisterInputLabel>
+                  <RegisterInputLabel htmlFor="confirm-password" >Confirm Password</RegisterInputLabel>
                 </RegisterLabelWrapper>
                 <RegisterInputIconWrapper>
                   <RegisterIconWrapper>

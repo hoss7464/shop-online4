@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { clickToggle } from "../../redux/actions/toggleSlice";
-import { handleChange } from "../../redux/actions/form/changeSlice";
+import { handleChange, resetRetievePasswordForm } from "../../redux/actions/form/changeSlice";
 import { SigninContainer, SigninWrapper } from "../signin/SigninElements";
 import {
   validateRetrievePassword,
@@ -54,13 +54,39 @@ const RetrievePassword = () => {
     dispatch(validateRetrieveConfirmPassword({ password, confirmPassword }));
   };
   //-------------------------------------------------------------------------------------------------------------------
+  //submit function :
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const password = formData.retrievePassword.password
+    const confirmPassword = formData.retrievePassword.confirmPassword
+
+    dispatch(validateRetrievePassword(password))
+    dispatch(validateRetrieveConfirmPassword(confirmPassword))
+
+    const isPasswordRequired = passwordError || password.trim() === ""
+    const isConfirmPasswordRequired = confirmPasswordError || confirmPassword.trim() === ""
+
+    if (isPasswordRequired || isConfirmPasswordRequired) {
+      return
+    }
+
+    const submitData = {
+      password,
+      confirmPassword
+    }
+
+    console.log(submitData)
+
+    dispatch(resetRetievePasswordForm())
+  }
 
   return (
     <>
       <SigninContainer>
         <SigninWrapper>
           <RegisterFormWrapper>
-            <RegisterForm onSubmit={(e) => e.preventDefault()}>
+            <RegisterForm onSubmit={handleSubmit}>
               <SignupHeaderWrapper>
                 <SignupHeader>Retrieve Password</SignupHeader>
               </SignupHeaderWrapper>
