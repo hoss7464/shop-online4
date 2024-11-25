@@ -21,9 +21,13 @@ import {
   RegisterErrorWrapper,
   RegisterError,
 } from "../signup/SignupElements";
+import useGetData from "../../hook/useGetData";
+import { useNavigate } from "react-router-dom";
 //-------------------------------------------------------------------------------------------------
 
 const ForgotPassword = () => {
+  const { getData } = useGetData("http://localhost:5000/posts");
+  const navigate = useNavigate();
   //Selectors : 
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.change);
@@ -37,23 +41,34 @@ const ForgotPassword = () => {
   };
   //-------------------------------------------------------------------------------------------------
   //Submit function : 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-
+    //To get forgot password states :
     const email = formData.forgotPassword.email;
+    //To validate each input on change :
     dispatch(validateForgotPasswordEmail(email))
+    //To get input errors :
     const isEmailRequired = emailError || email.trim() === ""
-
+    //To show input errors at the time of submiting incorrect data :
     if (isEmailRequired) {
       return
     }
-
-    const submitData = {
-      email 
+    //To send GET request to server :
+    try {
+      const fetchedData = await getData("http://localhost:5000/posts");
+      //To find correct data on server :
+      const user = fetchedData.find(
+        (user) => user.email === email
+      );
+      if (user) {
+        navigate(`/retrievePassword/${user.id}`); 
+      } else {
+        alert("Invalid email");
+      }
+    } catch (err) {
+      alert(`Unable to fetch data: ${err.message}`);
     }
-
-    console.log(submitData)
-
+    //To erase input after submiting :
     dispatch(resetForgotPsswordForm())
   }
   

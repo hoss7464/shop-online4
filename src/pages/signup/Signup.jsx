@@ -7,15 +7,8 @@ import { clickToggle } from "../../redux/actions/toggleSlice";
 import { validateSignupEmail } from "../../redux/actions/form/emailValidationSlice";
 import { validateSignupUsername } from "../../redux/actions/form/usernameValidationSlice";
 import { validateSignupPhone } from "../../redux/actions/form/phoneValidationSlice";
-import {
-  validateSignupPassword,
-  validateSignupConfirmPassword,
-} from "../../redux/actions/form/passwordValidationSlice";
-import {
-  handleChange,
-  handlePhoneChange,
-  resetSignupForm
-} from "../../redux/actions/form/changeSlice";
+import {validateSignupPassword,validateSignupConfirmPassword,} from "../../redux/actions/form/passwordValidationSlice";
+import {handleChange,handlePhoneChange,resetSignupForm} from "../../redux/actions/form/changeSlice";
 import {
   RegisterContainer,
   RegisterWrapper,
@@ -46,28 +39,21 @@ import {
   RegisterError,
 } from "./SignupElements";
 import PasswordStrengthBar from "react-password-strength-bar";
+import usePostData from "../../hook/usePostData";
 //-------------------------------------------------------------------------------------------------------------
 
 const Signup = () => {
+  //custom hook to POST data on server :
+  const { postData } = usePostData("http://localhost:5000/posts");
   //Selectors :
   const dispatch = useDispatch();
   const toggles = useSelector((state) => state.toggle.toggles);
   const formData = useSelector((state) => state.change);
-  const emailError = useSelector(
-    (state) => state.emailValidation.signupEmailError
-  );
-  const usernameError = useSelector(
-    (state) => state.usernameValidation.signupUsernameError
-  );
-  const phoneError = useSelector(
-    (state) => state.phoneValidation.signupPhoneError
-  );
-  const passwordError = useSelector(
-    (state) => state.passwordValidation.signupPasswordValidation
-  );
-  const confirmPasswordError = useSelector(
-    (state) => state.passwordValidation.signupConfirmPasswordValidation
-  );
+  const emailError = useSelector((state) => state.emailValidation.signupEmailError);
+  const usernameError = useSelector((state) => state.usernameValidation.signupUsernameError);
+  const phoneError = useSelector((state) => state.phoneValidation.signupPhoneError);
+  const passwordError = useSelector((state) => state.passwordValidation.signupPasswordValidation);
+  const confirmPasswordError = useSelector((state) => state.passwordValidation.signupConfirmPasswordValidation);
   //-------------------------------------------------------------------------------------------------------------
   //Email validation :
   const handleEmailChange = (e) => {
@@ -93,42 +79,37 @@ const Signup = () => {
   const handleConfirmPasswordChange = (e) => {
     const confirmPassword = e.target.value;
     const password = formData.signup.password;
-    dispatch(
-      handleChange({
-        formName: "signup",
-        name: "confirmPassword",
-        value: confirmPassword,
-      })
-    );
+    dispatch(handleChange({formName: "signup",name: "confirmPassword",value: confirmPassword,}));
     dispatch(validateSignupConfirmPassword({ password, confirmPassword }));
   };
   //-------------------------------------------------------------------------------------------------------------
   //Submit function :
   const handleSubmit = (e) => {
+    //To prevent reloading the page :
     e.preventDefault();
-   
+    //To get the satets from slice :
     const username = formData.signup.fullname
     const email = formData.signup.email
     const phone = formData.signup.phone
-    const Password = formData.signup.password
+    const password = formData.signup.password
     const confirmPassword = formData.signup.confirmPassword
-
+    //To validate inputs at the time of submiting :
     dispatch(validateSignupUsername(username))
     dispatch(validateSignupEmail(email))
     dispatch(validateSignupPhone(phone))
-    dispatch(validateSignupPassword(Password))
+    dispatch(validateSignupPassword(password))
     dispatch(validateSignupConfirmPassword(confirmPassword))
-
+    //conditions for validation at the time of submiting :
     const isUsernameRequired = usernameError || username.trim() === ""
     const isEmailRequired = emailError || email.trim() === ""
     const isPhoneRequired = phoneError || phone.trim() === ""
-    const isPasswordRequired = passwordError || Password.trim() === ""
+    const isPasswordRequired = passwordError || password.trim() === ""
     const isConfirmPasswordRequired = confirmPasswordError || confirmPassword.trim() === ""
-    
+    //To prevent submiting data if each input has field incorrectly :
     if (isUsernameRequired || isEmailRequired || isPhoneRequired || isPasswordRequired || isConfirmPasswordRequired ) {
       return
     }
-    
+    //submited data to server : 
     const submitData = {
       fullname: formData.signup.fullname,
       email: formData.signup.email,
@@ -136,8 +117,9 @@ const Signup = () => {
       password: formData.signup.password,
       confirmPassword: formData.signup.confirmPassword,
     };
-    
-    console.log(submitData)
+    //To post data on server :
+    postData(submitData);
+    //To erase data : 
     dispatch(resetSignupForm())
   };
 
@@ -152,7 +134,7 @@ const Signup = () => {
               </SignupHeaderWrapper>
               <RegisterInputLabelWrapper>
                 <RegisterLabelWrapper>
-                  <RegisterInputLabel htmlFor="username" >Username</RegisterInputLabel>
+                  <RegisterInputLabel htmlFor="username">Username</RegisterInputLabel>
                 </RegisterLabelWrapper>
                 <RegisterInputIconWrapper>
                   <RegisterIconWrapper>

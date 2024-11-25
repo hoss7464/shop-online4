@@ -7,6 +7,7 @@ import Signin from "./pages/signin/Signin";
 import Signup from "./pages/signup/Signup";
 import ForgotPassword from "./pages/forgotPassword/ForgotPassword.jsx";
 import RetrievePassword from "./pages/retrievePassword/RetrievePassword.jsx";
+import Dashboard from "./pages/dashboard/Dashboard.jsx";
 import Navbar from "./components/navbar/Navbar";
 import Sidebar from "./components/sidebar/Sidebar.jsx";
 
@@ -24,7 +25,8 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
-          <Route path="/retrievePassword" element={<RetrievePassword />} />
+          <Route path="/retrievePassword/:userId" element={<RetrievePassword />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
     </>

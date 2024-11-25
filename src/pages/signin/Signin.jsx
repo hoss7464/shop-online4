@@ -1,7 +1,7 @@
 import React from "react";
 import { SigninContainer, SigninWrapper } from "./SigninElements";
 import { useSelector, useDispatch } from "react-redux";
-import { handleChange, resetSigninForm } from "../../redux/actions/form/changeSlice";
+import {handleChange,resetSigninForm} from "../../redux/actions/form/changeSlice";
 import { validateSigninEmail } from "../../redux/actions/form/emailValidationSlice";
 import { validateSigninPassword } from "../../redux/actions/form/passwordValidationSlice";
 import {
@@ -25,61 +25,69 @@ import {
   RegisterErrorWrapper,
   RegisterError,
 } from "../signup/SignupElements";
+import useGetData from "../../hook/useGetData";
+import { useNavigate } from "react-router-dom";
 //---------------------------------------------------------------------------------------------------------
 
 const Signin = () => {
+  const { getData } = useGetData();
+  const navigate = useNavigate();
   //Selectors :
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.change);
   const emailError = useSelector((state) => state.emailValidation.signinEmailError);
-  const passwordError = useSelector((state) => state.passwordValidation.signinPasswordValidation)
+  const passwordError = useSelector((state) => state.passwordValidation.signinPasswordValidation);
   //---------------------------------------------------------------------------------------------------------
-  //Email validation : 
+  //Email validation :
   const handleEmailChange = (e) => {
     const value = e.target.value;
     dispatch(handleChange({ formName: "signin", name: "email", value }));
     dispatch(validateSigninEmail(value));
   };
   //--------------------------------------------------------------------------------------------------------
-  //Sign in validation : 
+  //Sign in validation :
   const handleSigninChange = (e) => {
-    const value = e.target.value 
+    const value = e.target.value;
     dispatch(handleChange({ formName: "signin", name: "password", value }));
-    dispatch(validateSigninPassword(value))
-  }
+    dispatch(validateSigninPassword(value));
+  };
   //---------------------------------------------------------------------------------------------------------
   //Submit function :
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  
+    //To get sign in states :
     const email = formData.signin.email;
     const password = formData.signin.password;
-  
-    
+    //To validate each input on change :
     dispatch(validateSigninEmail(email));
     dispatch(validateSigninPassword(password));
-  
-    
+    //To get input errors :
     const isEmailRequired = emailError || email.trim() === "";
     const isPasswordRequired = passwordError || password.trim() === "";
-  
-    
+    //To show input errors at the time of submiting incorrect data :
     if (isEmailRequired || isPasswordRequired) {
       return;
     }
-  
-    
-    const submitData = {
-      email,
-      password,
-    };
-  
-    console.log(submitData);
-  
-    
-    dispatch(resetSigninForm());
+    //To send GET request to server :
+    try {
+      const fetchedData = await getData("http://localhost:5000/posts");
+      //To find correct data on server :
+      const user = fetchedData.find(
+        (user) => user.email === email && user.password === password
+      );
+      if (user) {
+        navigate("/dashboard"); 
+      } else {
+        alert("Invalid email or password");
+      }
+    } catch (err) {
+      alert(`Unable to fetch data: ${err.message}`);
+    } finally {
+      //To erase inputs after submiting data : 
+      dispatch(resetSigninForm());
+    }
   };
-  
+
   return (
     <>
       <SigninContainer>
@@ -89,10 +97,10 @@ const Signin = () => {
               <SignupHeaderWrapper>
                 <SignupHeader>Sign In</SignupHeader>
               </SignupHeaderWrapper>
-              
+
               <RegisterInputLabelWrapper>
                 <RegisterLabelWrapper>
-                  <RegisterInputLabel>Email</RegisterInputLabel>
+                  <RegisterInputLabel htmlFor="email" >Email</RegisterInputLabel>
                 </RegisterLabelWrapper>
                 <RegisterInputIconWrapper>
                   <RegisterIconWrapper>
@@ -117,7 +125,7 @@ const Signin = () => {
 
               <RegisterInputLabelWrapper>
                 <RegisterLabelWrapper>
-                  <RegisterInputLabel>Password</RegisterInputLabel>
+                  <RegisterInputLabel htmlFor="email" >Password</RegisterInputLabel>
                 </RegisterLabelWrapper>
                 <RegisterInputIconWrapper>
                   <RegisterIconWrapper>

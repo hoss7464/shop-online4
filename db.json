@@ -1,0 +1,20 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "fullname": "hossein1374",
+      "email": "hosseinfatollahi4541@gmail.com",
+      "phone": "+256651516511",
+      "password": "Hossein1374#",
+      "confirmPassword": "Hossein1374#"
+    },
+    {
+      "id": "2",
+      "fullname": "Mohammad1370",
+      "email": "mohammad@gmail.com",
+      "phone": "+15416516516",
+      "password": "Moji1360@",
+      "confirmPassword": "Moji1360@"
+    }
+  ]
+}

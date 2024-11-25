@@ -1,12 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { clickToggle } from "../../redux/actions/toggleSlice";
-import { handleChange, resetRetievePasswordForm } from "../../redux/actions/form/changeSlice";
+import {handleChange,resetRetievePasswordForm} from "../../redux/actions/form/changeSlice";
 import { SigninContainer, SigninWrapper } from "../signin/SigninElements";
-import {
-  validateRetrievePassword,
-  validateRetrieveConfirmPassword,
-} from "../../redux/actions/form/passwordValidationSlice";
+import {validateRetrievePassword,validateRetrieveConfirmPassword} from "../../redux/actions/form/passwordValidationSlice";
 import {
   RegisterFormWrapper,
   RegisterForm,
@@ -27,20 +24,25 @@ import {
   RegisterSubmitBtnWrapper,
   RegisterSubmitButton,
   RegisterErrorWrapper,
-  RegisterError
+  RegisterError,
 } from "../signup/SignupElements";
 import PasswordStrengthBar from "react-password-strength-bar";
+import { useParams, useNavigate } from "react-router-dom";
+import useUpdateData from "../../hook/useUpdateData";
 //-------------------------------------------------------------------------------------------------------------------
 
 const RetrievePassword = () => {
-  //Selectors : 
+  const { userId } = useParams();
+  const navigate = useNavigate();
+  const { updateData } = useUpdateData(`http://localhost:5000/posts/${userId}`);
+  //Selectors :
   const dispatch = useDispatch();
   const toggles = useSelector((state) => state.toggle.toggles);
   const formData = useSelector((state) => state.change);
   const passwordError = useSelector((state) => state.passwordValidation.retrievePasswordValidation);
   const confirmPasswordError = useSelector((state) => state.passwordValidation.retrieveConfirmPasswordValidation);
   //-------------------------------------------------------------------------------------------------------------------
-  //Passwor and confirm password validation : 
+  //Passwor and confirm password validation :
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     dispatch(handleChange({ formName: "retrievePassword", name: "password", value }));
@@ -55,31 +57,37 @@ const RetrievePassword = () => {
   };
   //-------------------------------------------------------------------------------------------------------------------
   //submit function :
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    const password = formData.retrievePassword.password
-    const confirmPassword = formData.retrievePassword.confirmPassword
-
-    dispatch(validateRetrievePassword(password))
-    dispatch(validateRetrieveConfirmPassword(confirmPassword))
-
-    const isPasswordRequired = passwordError || password.trim() === ""
-    const isConfirmPasswordRequired = confirmPasswordError || confirmPassword.trim() === ""
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    //To get retrieve password states :
+    const password = formData.retrievePassword.password;
+    const confirmPassword = formData.retrievePassword.confirmPassword;
+    //To validate each input on change :
+    dispatch(validateRetrievePassword(password));
+    dispatch(validateRetrieveConfirmPassword(confirmPassword));
+    //To get input errors :
+    const isPasswordRequired = passwordError || password.trim() === "";
+    const isConfirmPasswordRequired =confirmPasswordError || confirmPassword.trim() === "";
+    //To show input errors at the time of submiting incorrect data :
     if (isPasswordRequired || isConfirmPasswordRequired) {
-      return
+      return;
     }
-
+    //Submited data :
     const submitData = {
       password,
-      confirmPassword
+      confirmPassword,
+    };
+    //To send PATCH request to update data on server : 
+    try {
+      await updateData(submitData);
+      dispatch(resetRetievePasswordForm());
+      navigate("/signin");
+    } catch (err) {
+      alert("Error updating password:", err.message);
     }
-
-    console.log(submitData)
-
-    dispatch(resetRetievePasswordForm())
-  }
+    //to erase inputs after submiting : 
+    dispatch(resetRetievePasswordForm());
+  };
 
   return (
     <>
@@ -93,7 +101,7 @@ const RetrievePassword = () => {
 
               <RegisterInputLabelWrapper>
                 <RegisterLabelWrapper>
-                  <RegisterInputLabel>New Password</RegisterInputLabel>
+                  <RegisterInputLabel htmlFor="new password" >New Password</RegisterInputLabel>
                 </RegisterLabelWrapper>
                 <RegisterInputIconWrapper>
                   <RegisterIconWrapper>
@@ -133,7 +141,7 @@ const RetrievePassword = () => {
 
               <RegisterInputLabelWrapper>
                 <RegisterLabelWrapper>
-                  <RegisterInputLabel>Confirm Password</RegisterInputLabel>
+                  <RegisterInputLabel htmlFor="confirm password">Confirm Password</RegisterInputLabel>
                 </RegisterLabelWrapper>
                 <RegisterInputIconWrapper>
                   <RegisterIconWrapper>
