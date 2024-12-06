@@ -10,6 +10,7 @@ import RetrievePassword from "./pages/retrievePassword/RetrievePassword.jsx";
 import Dashboard from "./pages/dashboard/Dashboard.jsx";
 import Navbar from "./components/navbar/Navbar";
 import Sidebar from "./components/sidebar/Sidebar.jsx";
+import Footer from "./components/footer/Footer.jsx";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/retrievePassword/:userId" element={<RetrievePassword />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
+        <Footer />
       </Router>
     </>
   );

@@ -28,7 +28,7 @@ const Section6Cards = ({
         <Section6CardWrapper>
           <Section6StarWrapper>
             <Rating
-              style={{ color: "#efefef" }}
+              style={{ color: "#989898" }}
               name="half-rating-read"
               defaultValue={2.5}
               precision={5}
