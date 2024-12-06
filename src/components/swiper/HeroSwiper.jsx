@@ -6,7 +6,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
-const HeroSwiper = ({ data, sliceStart, sliceEnd, CustomComponent }) => {
+const HeroSwiper = ({slideNumber, data, sliceStart, sliceEnd, CustomComponent }) => {
   const slicedData = sliceEnd
     ? data.slice(sliceStart, sliceEnd)
     : data.slice(sliceStart);
@@ -14,7 +14,7 @@ const HeroSwiper = ({ data, sliceStart, sliceEnd, CustomComponent }) => {
     <>
       <Swiper
         spaceBetween={20}
-        slidesPerView={5}
+        slidesPerView={slideNumber}
         centeredSlides={true}
         loop={true}
         autoplay={{
@@ -44,7 +44,7 @@ const HeroSwiper = ({ data, sliceStart, sliceEnd, CustomComponent }) => {
             spaceBetween: 20,
           },
           1440: {
-            slidesPerView: 5,
+            slidesPerView: 4,
             spaceBetween: 20,
           },
         }}

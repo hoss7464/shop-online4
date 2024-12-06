@@ -55,6 +55,7 @@ const HeroSection = () => {
         <HeroWrapper2>
           <HeroSwiper
             data={db2}
+            slideNumber={5}
             sliceStart={0}
             sliceEnd={8}
             CustomComponent={SliderCart}
