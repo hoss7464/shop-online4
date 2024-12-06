@@ -19,12 +19,12 @@ export const Container1 = styled.div`
     padding-left: 56px;
     padding-right: 56px;
   }
-  @media only screen and (min-width: 993px) and (max-width: 1024px) {
+  @media only screen and (min-width: 993px) and (max-width: 1079px) {
     padding-left: 72px;
     padding-right: 72px;
   }
   @media only screen and (min-width: 1080px) and (max-width: 1920px) {
-    padding-left: 150px;
-    padding-right: 150px;
+    padding-left: 120px;
+    padding-right: 120px;
   }
 `;
