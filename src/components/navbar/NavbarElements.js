@@ -144,6 +144,7 @@ export const Navlink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
+
 `;
 
 export const NavbarLinkIconWrapper = styled.div`
@@ -156,10 +157,26 @@ export const NavbarLinkIconWrapper = styled.div`
   cursor: pointer;
   border: solid 3px ${colors.prime1};
   padding: 0.5rem;
+  position: relative;
   &:hover {
     background-color: ${colors.sec1};
   }
 `;
+export const MySpan = styled.span`
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 0.2rem;
+background-color: ${colors.sec1};
+color: ${colors.prime1};
+position: absolute;
+border-radius: 10px;
+width: 20px;
+height: 20px;
+right: 0;
+top: -10px;
+`
+
 export const NavbarIcon = styled.img`
   width: 18px;
   height: 18px;
@@ -269,3 +286,4 @@ export const HamburgerIcon = styled(HiMenu)`
   width: 20px;
   height: 20px;
 `;
+

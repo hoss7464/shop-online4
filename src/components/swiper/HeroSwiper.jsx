@@ -55,6 +55,12 @@ const HeroSwiper = ({slideNumber, data, sliceStart, sliceEnd, CustomComponent })
               sliderName={myData.header}
               sliderPrice={myData.price}
               sliderImg={myData.picture}
+              sliderId = {myData.id}
+              sliderProduct = {myData.product}
+              sliderCategory = {myData.category}
+              sliderBrand= {myData.brand}
+              sliderCode = {myData.code}
+              sliderCurrentPrice= {myData.currentPrice}
             />
           </SwiperSlide>
         ))}

@@ -21,6 +21,7 @@ import {
   Navlink,
   NavbarLinkIconWrapper,
   NavbarIcon,
+  MySpan,
   SignInUpWrapper,
   SignInUpLink,
   SignInWrapper,
@@ -48,6 +49,8 @@ const Navbar = () => {
   //Selectors for toggle click :
   const dispatch = useDispatch();
   const toggles = useSelector((state) => state.toggle.toggles);
+  const selectedProducts = useSelector((state) => state.purchase.selectedProducts)
+  const productCount = selectedProducts.length;
   //----------------------------------------------------------------------------------------------
   //Hover function :
   const HoverMouseEnter = (id) => {
@@ -91,7 +94,7 @@ const Navbar = () => {
                 </Tooltip>
               </Navlink>
 
-              <Navlink to="/purchase">
+              <Navlink to="/purchase" >
                 <Tooltip title="Purchase" placement="bottom">
                   <NavbarLinkIconWrapper
                     onMouseEnter={() => HoverMouseEnter("toggle2")}
@@ -101,6 +104,7 @@ const Navbar = () => {
                       alt="purchase icon"
                       src={toggles["toggle2"] ? myPurchase2 : myPurchase1}
                     />
+                    {productCount > 0 && <MySpan>{productCount}</MySpan>}
                   </NavbarLinkIconWrapper>
                 </Tooltip>
               </Navlink>
