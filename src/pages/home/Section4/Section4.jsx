@@ -29,6 +29,7 @@ import {
 import { HomeData2 } from "../../../helpers/HomeData";
 import ShopImg1 from "../../../assets/png/Shop1.jpg"
 import ShopImg2 from "../../../assets/png/Shop2.jpg"
+//-------------------------------------------------------------------------------------------
 
 const Section4 = () => {
   return (

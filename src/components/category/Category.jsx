@@ -15,12 +15,15 @@ import {
   CategoryBtn,
 } from "./CategoryElements";
 import { CatData1 } from "../../helpers/CategoryData";
+//------------------------------------------------------------------------------------------------------
 
 const Category = () => {
+  //----------------------------------------------------------------------------------------------------
     const dispatch = useDispatch()
-    const handleFilter = (value) => {
-        dispatch(categoryFilterProducts(value))
-    }
+  //----------------------------------------------------------------------------------------------------
+  //Filter products based on category
+    const handleFilter = (value) => {dispatch(categoryFilterProducts(value))}
+  //----------------------------------------------------------------------------------------------------  
   return (
     <>
       <CategoryContainer>

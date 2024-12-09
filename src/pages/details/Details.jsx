@@ -15,33 +15,34 @@ import {
   DetailbtnWrapper,
 } from "./DetailsElements";
 import ScrollToTop from "../../core-ui/ScrollToTop";
+//-------------------------------------------------------------------------------------------------
 
 const Details = () => {
   const dispatch = useDispatch();
-  const selectedDetailProduct = useSelector(
-    (state) => state.purchase.selectedDetailProduct
-  );
-  const selectedProducts = useSelector(
-    (state) => state.purchase.selectedProducts
-  );
+  //-------------------------------------------------------------------------------------------------
+  //Selectors : 
+  const selectedDetailProduct = useSelector((state) => state.purchase.selectedDetailProduct);
+  const selectedProducts = useSelector((state) => state.purchase.selectedProducts);
+  //-------------------------------------------------------------------------------------------------
+  //Message to show before rendering the product details :
   if (!selectedDetailProduct) {
     return <p>Loading product details...</p>;
   }
-
+  //-------------------------------------------------------------------------------------------------
+  //Function to add selected product from details page into purchase cart :
   const isAlreadySelected = selectedProducts.some(
     (product) => product.id === selectedDetailProduct.id
   );
 
   const handleAddToCart = () => {
     // Check if the product already exists in the selectedProducts array
-
     if (!isAlreadySelected) {
       dispatch(addSelectedProduct(selectedDetailProduct));
     } else {
       alert("This product is already in the cart.");
     }
   };
-
+  //-------------------------------------------------------------------------------------------------
   return (
     <>
       <ScrollToTop />

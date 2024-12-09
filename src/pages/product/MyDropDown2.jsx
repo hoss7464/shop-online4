@@ -6,16 +6,19 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-
+//--------------------------------------------------------------------------------------------
 const MyDropDown2 = () => {
   const dispatch = useDispatch();
+  //--------------------------------------------------------------------------------------------
+  //Selectors :
   const selectedCategory = useSelector((state) => state.filter.category);
-  
+  //--------------------------------------------------------------------------------------------
+  //Function to filter products based on category : 
   const handleChange = (event) => {
     const newCategory = event.target.value;
     dispatch(categoryFilterProducts(newCategory));
   };
-  
+  //--------------------------------------------------------------------------------------------
   return (
     <>
       <Box sx={{ minWidth: 120 }} marginBottom={"1rem"} >

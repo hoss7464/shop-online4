@@ -1,10 +1,11 @@
 import { useState } from "react";
-
+//--------------------------------------------------------------------------------------------------
 const usePostData = (url) => {
+  //States : 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [data, setData] = useState("");
-
+//--------------------------------------------------------------------------------------------------
   const postData = (payload) => {
     setIsLoading(true);
     setError(null);

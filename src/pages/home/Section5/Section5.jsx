@@ -15,6 +15,7 @@ import {
 import { HomeData2 } from "../../../helpers/HomeData";
 import HeroSwiper from "../../../components/swiper/HeroSwiper";
 import SliderCart from "../../../components/sliderCart/SliderCart";
+//----------------------------------------------------------------------------------------------
 
 const Section5 = () => {
   return (

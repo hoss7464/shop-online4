@@ -3,14 +3,18 @@ import {
   ProductBrandFilterWrapper2,
   ProductBrandFilterButton,
 } from "./ProductsElements";
-import { brandFilterProducts} from "../../redux/actions/filter/filterSlice";
+import { brandFilterProducts } from "../../redux/actions/filter/filterSlice";
 import { useDispatch } from "react-redux";
+//--------------------------------------------------------------------------------------------
 
-const BrandBtnFilter = ({brandValue, brandName}) => {
-    const dispatch = useDispatch()
-    const clickFilter = (value) => {
-        dispatch(brandFilterProducts(value))
-    }
+const BrandBtnFilter = ({ brandValue, brandName }) => {
+  const dispatch = useDispatch();
+  //--------------------------------------------------------------------------------------------
+  //Function to filter products based on brand : 
+  const clickFilter = (value) => {
+    dispatch(brandFilterProducts(value));
+  };
+  //--------------------------------------------------------------------------------------------
   return (
     <>
       <ProductBrandFilterWrapper2>

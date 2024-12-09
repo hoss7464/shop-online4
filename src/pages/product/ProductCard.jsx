@@ -16,6 +16,7 @@ import {
 } from "../../components/sliderCart/SliderCrtElements";
 import { ProductionCartWrapper, SliderCartImgLink } from "./ProductsElements";
 import CartShoppingIcon from "../../assets/svg/CartShoppingIcon.svg";
+//--------------------------------------------------------------------------------------------
 
 const ProductCard = ({
   sliderName,
@@ -29,14 +30,15 @@ const ProductCard = ({
   sliderCurrentPrice,
 }) => {
   const dispatch = useDispatch();
-  const selectedProducts = useSelector(
-    (state) => state.purchase.selectedProducts
-  );
-
+  //--------------------------------------------------------------------------------------------
+  //Selectors : 
+  const selectedProducts = useSelector((state) => state.purchase.selectedProducts);
+  //--------------------------------------------------------------------------------------------
+  //Function to add products just once : 
   const isAlreadySelected = selectedProducts.some(
     (product) => product.id === sliderId
   );
-
+  //Function to add products into purchase cart on click : 
   const handleButtonClick = () => {
     if (!isAlreadySelected) {
       dispatch(
@@ -54,7 +56,8 @@ const ProductCard = ({
       );
     }
   };
-
+  //--------------------------------------------------------------------------------------------
+  //Function to pass the information of the products into detail page : 
   const handleImageClick = () => {
     dispatch(
       setSelectedDetailProduct({
@@ -70,7 +73,7 @@ const ProductCard = ({
       })
     );
   };
-
+  //--------------------------------------------------------------------------------------------
   return (
     <>
       <Grid item xs={12} sm={6} md={4} lg={3}>

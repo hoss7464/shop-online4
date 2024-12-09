@@ -32,29 +32,32 @@ import MyDropDown1 from "./MyDropDown1";
 import MyDropDown2 from "./MyDropDown2";
 import SortDropdown from "./SortDropdown";
 import ScrollToTop from "../../core-ui/ScrollToTop";
+//--------------------------------------------------------------------------------------------
 
 const Product = () => {
   const dispatch = useDispatch();
-  const filteredProducts = useSelector(
-    (state) => state.filter.filteredProducts
-  );
+  //--------------------------------------------------------------------------------------------
+  //Selectors : 
+  const filteredProducts = useSelector((state) => state.filter.filteredProducts);
   const minPrice = useSelector((state) => state.filter.minPrice);
   const maxPrice = useSelector((state) => state.filter.maxPrice);
-
+  //--------------------------------------------------------------------------------------------
+  //Function to filter products based on min price : 
   const handleMinPriceChange = (e) => {
     const value = e.target.value ? parseFloat(e.target.value) : 0;
     dispatch(minPriceFilterProducts(value));
   };
-
+  //Function to filter products based on max price : 
   const handleMaxPriceChange = (e) => {
     const value = e.target.value ? parseFloat(e.target.value) : null;
     dispatch(maxPriceFilterProducts(value));
   };
-
+  //--------------------------------------------------------------------------------------------
+  //Function to reset all filters on productions : 
   const handleResetFilters = () => {
     dispatch(resetAllFilters());
   };
-
+  //--------------------------------------------------------------------------------------------
   return (
     <>
       <ScrollToTop />

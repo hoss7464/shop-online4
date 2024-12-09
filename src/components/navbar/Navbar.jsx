@@ -70,17 +70,18 @@ const Navbar = () => {
     dispatch(hoverDisableToggle(id));
   };
   //----------------------------------------------------------------------------------------------
+  //Function to filter based on search input
   const handleSearchInputChange = (e) => {
     dispatch(searchInputQueryFilter(e.target.value));
   };
-
+  //Function to triggre search input filter on click : 
   const handleSearchIconClick = () => {
     if (searchValue.trim() !== "") { 
       navigate("/product");
       dispatch(searchInputFilterClick());
     }
   };
-
+  //Function to triggre search input filter on pressing Enter key : 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -90,7 +91,7 @@ const Navbar = () => {
       }
     }
   };
-
+  //----------------------------------------------------------------------------------------------
   return (
     <>
       <NavbarContainer>

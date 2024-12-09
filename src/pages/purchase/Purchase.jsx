@@ -39,33 +39,39 @@ import {
   CounterCloseIcon,
 } from "./PurchaseElements";
 import ScrollToTop from "../../core-ui/ScrollToTop";
-
+//--------------------------------------------------------------------------------------------
 const Purchase = () => {
   const dispatch = useDispatch();
-  const selectedProducts = useSelector(
-    (state) => state.purchase.selectedProducts
-  );
-
+  //--------------------------------------------------------------------------------------------
+  //Selectors : 
+  const selectedProducts = useSelector((state) => state.purchase.selectedProducts);
+  //--------------------------------------------------------------------------------------------
+  //Function to increase quantity of selected products :
   const handleIncreaseQuantity = (id) => {
     dispatch(increaseQuantity(id));
   };
+  //Function to increase quantity of selected products :
   const handleDecreaseQuantity = (id) => {
     dispatch(decreaseQuantity(id));
   };
+  //--------------------------------------------------------------------------------------------
+  //Function to remove product from purchase cart : 
   const handleRemoveProduct = (id) => {
     dispatch(removeSelectedProduct(id));
   };
-  //To count total price :
+  //--------------------------------------------------------------------------------------------
+  //Function to count total price of selected products :
   const totalPrice = selectedProducts.reduce(
     (acc, product) => acc + product.price,
     0
   );
-
+  //--------------------------------------------------------------------------------------------
+  //Function to save selected products in purchase cart when page reloads : 
   useEffect(() => {
     // Save to local storage whenever selectedProducts changes
     localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
   }, [selectedProducts]);
-
+  //--------------------------------------------------------------------------------------------
   return (
     <>
       <ScrollToTop />

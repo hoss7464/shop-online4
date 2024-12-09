@@ -22,6 +22,7 @@ import HeroImg from "../../../assets/svg/HeroImg.svg";
 import HeroSwiper from "../../../components/swiper/HeroSwiper";
 import SliderCart from "../../../components/sliderCart/SliderCart";
 import { HomeData1 } from "../../../helpers/HomeData";
+//-------------------------------------------------------------------------------------------
 
 const HeroSection = () => {
   return (

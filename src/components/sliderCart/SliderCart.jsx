@@ -18,6 +18,7 @@ import {
   SliderCartImg,
 } from "./SliderCrtElements";
 import CartShoppingIcon from "../../assets/svg/CartShoppingIcon.svg";
+//------------------------------------------------------------------------------------------------------
 
 const SliderCart = ({
   sliderName,
@@ -30,15 +31,16 @@ const SliderCart = ({
   sliderCode,
   sliderCurrentPrice,
 }) => {
+  //------------------------------------------------------------------------------------------------------
   const dispatch = useDispatch();
-  const selectedProducts = useSelector(
-    (state) => state.purchase.selectedProducts
-  );
-
+  //------------------------------------------------------------------------------------------------------
+  //Selectors :
+  const selectedProducts = useSelector((state) => state.purchase.selectedProducts);
+  //------------------------------------------------------------------------------------------------------
+  //Function to store selected product into purchase cart : 
   const isAlreadySelected = selectedProducts.some(
     (product) => product.id === sliderId
   );
-
   const handleButtonClick = () => {
     if (!isAlreadySelected) {
       dispatch(
@@ -56,7 +58,8 @@ const SliderCart = ({
       );
     }
   };
-
+  //------------------------------------------------------------------------------------------------------
+  //Function to click on production's image to pass the information of selected product into Detail page :
   const handleImageClick = () => {
     dispatch(
       setSelectedDetailProduct({
@@ -72,6 +75,7 @@ const SliderCart = ({
       })
     );
   };
+  //------------------------------------------------------------------------------------------------------
   return (
     <>
       <SliderCartBtnTextWrapper>

@@ -14,6 +14,7 @@ import {
 import { HomeData2, HomeData4 } from "../../../helpers/HomeData";
 import { Grid } from "@mui/material";
 import Section6Cards from "./Section6Cards";
+//------------------------------------------------------------------------------------------------
 
 const Section6 = () => {
   return (

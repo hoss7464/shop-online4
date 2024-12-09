@@ -6,14 +6,19 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-
+//--------------------------------------------------------------------------------------------
 const SortDropdown = () => {
   const dispatch = useDispatch();
+  //--------------------------------------------------------------------------------------------
+  //Selectors : 
   const sortType = useSelector((state) => state.filter.sortType);
+  //--------------------------------------------------------------------------------------------
+  //Function to sort data based on min price and max price : 
   const handleChange = (event) => {
     const selectedSort = event.target.value;
     dispatch(sortProducts(selectedSort));
   };
+  //--------------------------------------------------------------------------------------------
   return (
     <>
       <Box sx={{ minWidth: 120 }} marginBottom={"1rem"}>

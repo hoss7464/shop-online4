@@ -1,6 +1,10 @@
 import React from "react";
 import { db2 } from "../../../db2/db2";
-import { Section2Container, Section2TextContainer, Section2SwiperWrapper } from "./Section2Elements";
+import {
+  Section2Container,
+  Section2TextContainer,
+  Section2SwiperWrapper,
+} from "./Section2Elements";
 import {
   SectionHeaderTextContainer,
   SectionHeaderTextWrapper,
@@ -11,13 +15,14 @@ import {
 import { HomeData2 } from "../../../helpers/HomeData";
 import HeroSwiper from "../../../components/swiper/HeroSwiper";
 import SliderCart from "../../../components/sliderCart/SliderCart";
+//--------------------------------------------------------------------------------------------
 
 const Section2 = () => {
   return (
     <>
       <Section2Container>
         <Section2TextContainer>
-        <SectionHeaderTextContainer>
+          <SectionHeaderTextContainer>
             <SectionHeaderTextWrapper>
               <SectionHeaderText>{HomeData2.text3}</SectionHeaderText>
             </SectionHeaderTextWrapper>
@@ -27,7 +32,7 @@ const Section2 = () => {
           </SectionHeaderTextContainer>
         </Section2TextContainer>
         <Section2SwiperWrapper>
-        <HeroSwiper
+          <HeroSwiper
             data={db2}
             slideNumber={4}
             sliceStart={8}

@@ -14,6 +14,7 @@ import {
   SocialIconLink,
 } from "./FooterElements";
 import { FaFacebook, FaYoutube, FaInstagram, FaTwitter } from "react-icons/fa";
+//--------------------------------------------------------------------------------------------------
 
 const Footer = () => {
   return (

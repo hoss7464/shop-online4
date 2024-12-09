@@ -123,7 +123,7 @@ const Signup = () => {
     //To erase data : 
     dispatch(resetSignupForm())
   };
-
+//--------------------------------------------------------------------------------------------
   return (
     <>
       <ScrollToTop />

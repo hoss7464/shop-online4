@@ -12,6 +12,7 @@ import {
   Section1CardBtn,
 } from "./Section1Elements";
 import { Grid } from "@mui/material";
+//----------------------------------------------------------------------------------------------
 
 const Section1Cards = ({ Section1Src, Sec1CardHead, Sec1CardPara }) => {
   return (

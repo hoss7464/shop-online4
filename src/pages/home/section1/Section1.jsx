@@ -14,6 +14,7 @@ import {
 } from "../../../components/text/HeaderSubheaderSectionText";
 import Section1Cards from "./Section1Cards";
 import { HomeData2, HomeData3 } from "../../../helpers/HomeData";
+//----------------------------------------------------------------------------------------
 
 const Section1 = () => {
   return (

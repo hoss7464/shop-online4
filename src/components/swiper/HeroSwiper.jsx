@@ -5,11 +5,19 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+//---------------------------------------------------------------------------------------------------
 
-const HeroSwiper = ({slideNumber, data, sliceStart, sliceEnd, CustomComponent }) => {
-  const slicedData = sliceEnd
-    ? data.slice(sliceStart, sliceEnd)
-    : data.slice(sliceStart);
+const HeroSwiper = ({
+  slideNumber,
+  data,
+  sliceStart,
+  sliceEnd,
+  CustomComponent,
+}) => {
+  //---------------------------------------------------------------------------------------------------
+  //To make swiper usable for slicing the product on database : 
+  const slicedData = sliceEnd ? data.slice(sliceStart, sliceEnd) : data.slice(sliceStart);
+  //---------------------------------------------------------------------------------------------------
   return (
     <>
       <Swiper
@@ -51,16 +59,17 @@ const HeroSwiper = ({slideNumber, data, sliceStart, sliceEnd, CustomComponent })
       >
         {slicedData.map((myData, index) => (
           <SwiperSlide className="swiper-slide1" key={index}>
+            {/* To make a custom compnent so that to replace whatever component we want **/}
             <CustomComponent
               sliderName={myData.header}
               sliderPrice={myData.price}
               sliderImg={myData.picture}
-              sliderId = {myData.id}
-              sliderProduct = {myData.product}
-              sliderCategory = {myData.category}
-              sliderBrand= {myData.brand}
-              sliderCode = {myData.code}
-              sliderCurrentPrice= {myData.currentPrice}
+              sliderId={myData.id}
+              sliderProduct={myData.product}
+              sliderCategory={myData.category}
+              sliderBrand={myData.brand}
+              sliderCode={myData.code}
+              sliderCurrentPrice={myData.currentPrice}
             />
           </SwiperSlide>
         ))}

@@ -1,10 +1,12 @@
 import { useState } from "react";
+//----------------------------------------------------------------------------------------------
 
 const useGetData = () => {
+  //States : 
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-
+//----------------------------------------------------------------------------------------------
   const getData = async (url) => {
     setIsLoading(true);
     setError("");

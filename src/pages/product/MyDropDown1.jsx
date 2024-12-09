@@ -6,14 +6,20 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+//--------------------------------------------------------------------------------------------
 
 const MyDropDown1 = () => {
+//--------------------------------------------------------------------------------------------
   const dispatch = useDispatch();
-  const brand = useSelector((state) => state.filter.brand)
-  
+  //--------------------------------------------------------------------------------------------
+  //Selectors :
+  const brand = useSelector((state) => state.filter.brand);
+  //--------------------------------------------------------------------------------------------
+  //Function to filter products based on brand :
   const handleChange = (e) => {
     dispatch(brandFilterProducts(e.target.value));
   };
+  //--------------------------------------------------------------------------------------------
   return (
     <>
       <Box sx={{ minWidth: 120 }} marginBottom={"1rem"}>

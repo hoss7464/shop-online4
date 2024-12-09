@@ -13,8 +13,7 @@ import Sidebar from "./components/sidebar/Sidebar.jsx";
 import Footer from "./components/footer/Footer.jsx";
 import Details from "./pages/details/Details.jsx";
 import ScrollToTop from "./core-ui/ScrollToTop.js";
-
-
+//--------------------------------------------------------------------------------------------
 
 function App() {
   return (

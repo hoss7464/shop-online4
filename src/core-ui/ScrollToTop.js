@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-
+//---------------------------------------------------------------------------------------
+//Function to scroll to top on reloading the page : 
 export default function ScrollToTop() {
   const { pathname } = useLocation();
 

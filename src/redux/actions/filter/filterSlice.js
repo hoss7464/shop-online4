@@ -70,6 +70,7 @@ export const filterSlice = createSlice({
         state.filteredProducts = state.allProducts;
       }
     },
+    //Function to filter products on clicking search icon :
     searchInputFilterClick: (state) => {
       const { allProducts, searchValue } = state;
       if (searchValue && searchValue.trim() !== "") {

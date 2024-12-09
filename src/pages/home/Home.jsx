@@ -9,6 +9,7 @@ import Section4 from "./Section4/Section4";
 import Section5 from "./Section5/Section5";
 import Section6 from "./Section6/Section6";
 import ScrollToTop from "../../core-ui/ScrollToTop";
+//-----------------------------------------------------------------------------------------
 
 const Home = () => {
   return (
