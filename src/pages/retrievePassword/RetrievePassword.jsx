@@ -29,6 +29,7 @@ import {
 import PasswordStrengthBar from "react-password-strength-bar";
 import { useParams, useNavigate } from "react-router-dom";
 import useUpdateData from "../../hook/useUpdateData";
+import ScrollToTop from "../../core-ui/ScrollToTop";
 //-------------------------------------------------------------------------------------------------------------------
 
 const RetrievePassword = () => {
@@ -91,6 +92,7 @@ const RetrievePassword = () => {
 
   return (
     <>
+      <ScrollToTop />
       <SigninContainer>
         <SigninWrapper>
           <RegisterFormWrapper>

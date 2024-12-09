@@ -1,7 +1,10 @@
 import React from "react";
 import { SigninContainer, SigninWrapper } from "../signin/SigninElements";
 import { useSelector, useDispatch } from "react-redux";
-import { handleChange, resetForgotPsswordForm } from "../../redux/actions/form/changeSlice";
+import {
+  handleChange,
+  resetForgotPsswordForm,
+} from "../../redux/actions/form/changeSlice";
 import { validateForgotPasswordEmail } from "../../redux/actions/form/emailValidationSlice";
 import {
   RegisterFormWrapper,
@@ -23,45 +26,48 @@ import {
 } from "../signup/SignupElements";
 import useGetData from "../../hook/useGetData";
 import { useNavigate } from "react-router-dom";
+import ScrollToTop from "../../core-ui/ScrollToTop";
 //-------------------------------------------------------------------------------------------------
 
 const ForgotPassword = () => {
   const { getData } = useGetData("http://localhost:5000/posts");
   const navigate = useNavigate();
-  //Selectors : 
+  //Selectors :
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.change);
-  const emailError = useSelector((state) => state.emailValidation.forgotPasswordEmailError);
+  const emailError = useSelector(
+    (state) => state.emailValidation.forgotPasswordEmailError
+  );
   //-------------------------------------------------------------------------------------------------
-  //Email validation : 
+  //Email validation :
   const handleEmailChange = (e) => {
     const value = e.target.value;
-    dispatch(handleChange({ formName: "forgotPassword", name: "email", value }));
+    dispatch(
+      handleChange({ formName: "forgotPassword", name: "email", value })
+    );
     dispatch(validateForgotPasswordEmail(value));
   };
   //-------------------------------------------------------------------------------------------------
-  //Submit function : 
+  //Submit function :
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     //To get forgot password states :
     const email = formData.forgotPassword.email;
     //To validate each input on change :
-    dispatch(validateForgotPasswordEmail(email))
+    dispatch(validateForgotPasswordEmail(email));
     //To get input errors :
-    const isEmailRequired = emailError || email.trim() === ""
+    const isEmailRequired = emailError || email.trim() === "";
     //To show input errors at the time of submiting incorrect data :
     if (isEmailRequired) {
-      return
+      return;
     }
     //To send GET request to server :
     try {
       const fetchedData = await getData("http://localhost:5000/posts");
       //To find correct data on server :
-      const user = fetchedData.find(
-        (user) => user.email === email
-      );
+      const user = fetchedData.find((user) => user.email === email);
       if (user) {
-        navigate(`/retrievePassword/${user.id}`); 
+        navigate(`/retrievePassword/${user.id}`);
       } else {
         alert("Invalid email");
       }
@@ -69,11 +75,12 @@ const ForgotPassword = () => {
       alert(`Unable to fetch data: ${err.message}`);
     }
     //To erase input after submiting :
-    dispatch(resetForgotPsswordForm())
-  }
-  
+    dispatch(resetForgotPsswordForm());
+  };
+
   return (
     <>
+      <ScrollToTop />
       <SigninContainer>
         <SigninWrapper>
           <RegisterFormWrapper>

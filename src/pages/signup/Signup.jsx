@@ -40,6 +40,7 @@ import {
 } from "./SignupElements";
 import PasswordStrengthBar from "react-password-strength-bar";
 import usePostData from "../../hook/usePostData";
+import ScrollToTop from "../../core-ui/ScrollToTop"
 //-------------------------------------------------------------------------------------------------------------
 
 const Signup = () => {
@@ -125,6 +126,7 @@ const Signup = () => {
 
   return (
     <>
+      <ScrollToTop />
       <RegisterContainer>
         <RegisterWrapper>
           <RegisterFormWrapper>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   increaseQuantity,
@@ -38,29 +38,44 @@ import {
   CloseBtn,
   CounterCloseIcon,
 } from "./PurchaseElements";
+import ScrollToTop from "../../core-ui/ScrollToTop";
 
 const Purchase = () => {
   const dispatch = useDispatch();
-  const selectedProducts = useSelector((state) => state.purchase.selectedProducts);
+  const selectedProducts = useSelector(
+    (state) => state.purchase.selectedProducts
+  );
 
-  const handleIncreaseQuantity = (id) => {dispatch(increaseQuantity(id));};
-  const handleDecreaseQuantity = (id) => {dispatch(decreaseQuantity(id));};
-  const handleRemoveProduct = (id) => {dispatch(removeSelectedProduct(id));};
+  const handleIncreaseQuantity = (id) => {
+    dispatch(increaseQuantity(id));
+  };
+  const handleDecreaseQuantity = (id) => {
+    dispatch(decreaseQuantity(id));
+  };
+  const handleRemoveProduct = (id) => {
+    dispatch(removeSelectedProduct(id));
+  };
   //To count total price :
   const totalPrice = selectedProducts.reduce(
     (acc, product) => acc + product.price,
     0
   );
 
+  useEffect(() => {
+    // Save to local storage whenever selectedProducts changes
+    localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
+  }, [selectedProducts]);
+
   return (
     <>
+      <ScrollToTop />
       <PurchaseContainer>
         <PurchaseBoxWrapper>
           <SelectedProductWrapper>
             {selectedProducts.map((data, index) => (
               <PurchaseCompoContainer key={index}>
                 <PurchaseCompoWrapper>
-                  <CloseBtn onClick={() => handleRemoveProduct(data.id)} >
+                  <CloseBtn onClick={() => handleRemoveProduct(data.id)}>
                     <CounterCloseIcon />
                   </CloseBtn>
                   <CompoIconWrapper>

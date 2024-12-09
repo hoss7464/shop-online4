@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../core-ui/Theme";
+import { Link } from "react-router-dom";
 
 export const ProductContainer = styled.div`
   display: flex;
@@ -215,3 +216,7 @@ export const ProductFilterResetBtn = styled.button`
   }
 `;
 //----------------------------------------------------------------
+export const SliderCartImgLink = styled(Link)`
+cursor: pointer;
+width: 100%;
+`

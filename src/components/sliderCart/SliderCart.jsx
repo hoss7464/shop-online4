@@ -1,6 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addSelectedProduct } from "../../redux/actions/purchase/purchaseSlice";
+import {
+  addSelectedProduct,
+  setSelectedDetailProduct,
+} from "../../redux/actions/purchase/purchaseSlice";
 import {
   SliderCartBtnTextWrapper,
   SliderCartBtnWrapper,
@@ -10,6 +13,7 @@ import {
   SliderCartNameText,
   SliderCartpriceTextWrapper,
   SliderCartpriceText,
+  SliderCartImgLink,
   SliderCartImgWrapper,
   SliderCartImg,
 } from "./SliderCrtElements";
@@ -52,6 +56,22 @@ const SliderCart = ({
       );
     }
   };
+
+  const handleImageClick = () => {
+    dispatch(
+      setSelectedDetailProduct({
+        id: sliderId,
+        name: sliderName,
+        price: sliderPrice,
+        img: sliderImg,
+        product: sliderProduct,
+        category: sliderCategory,
+        brand: sliderBrand,
+        code: sliderCode,
+        currentPrice: sliderCurrentPrice,
+      })
+    );
+  };
   return (
     <>
       <SliderCartBtnTextWrapper>
@@ -72,9 +92,12 @@ const SliderCart = ({
           </SliderCartpriceTextWrapper>
         </SliderCartTextWrapper>
       </SliderCartBtnTextWrapper>
-      <SliderCartImgWrapper>
-        <SliderCartImg alt="cart photo" src={sliderImg} />
-      </SliderCartImgWrapper>
+
+      <SliderCartImgLink to="/details">
+        <SliderCartImgWrapper onClick={handleImageClick}>
+          <SliderCartImg alt="cart photo" src={sliderImg} />
+        </SliderCartImgWrapper>
+      </SliderCartImgLink>
     </>
   );
 };

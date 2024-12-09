@@ -31,6 +31,7 @@ import BrandBtnFilter from "./BrandBtnFilter";
 import MyDropDown1 from "./MyDropDown1";
 import MyDropDown2 from "./MyDropDown2";
 import SortDropdown from "./SortDropdown";
+import ScrollToTop from "../../core-ui/ScrollToTop";
 
 const Product = () => {
   const dispatch = useDispatch();
@@ -56,6 +57,7 @@ const Product = () => {
 
   return (
     <>
+      <ScrollToTop />
       <ProductContainer>
         <ProductWrapper>
           <ProductLeftWrapper>
@@ -127,7 +129,7 @@ const Product = () => {
                 </ProductInputFilterWrapper2>
               </ProductInputFilterWrapper>
               <SortDropdown />
-              <ProductFilterResetBtnWrapper style={{marginTop : "2rem"}} >
+              <ProductFilterResetBtnWrapper style={{ marginTop: "2rem" }}>
                 <ProductFilterResetBtn onClick={handleResetFilters}>
                   Reset Filters
                 </ProductFilterResetBtn>
@@ -169,7 +171,7 @@ const Product = () => {
                   </ProductFilterResetBtn>
                 </ProductFilterResetBtnWrapper>
               </ProductMobileInputWrapper>
-              
+
               {/* **/}
               <ProductMbileDropdownWrapper>
                 <MyDropDown1 />

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../core-ui/Theme";
+import { Link } from "react-router-dom";
 
 export const SliderCartWrapper = styled.div`
   display: flex;
@@ -80,6 +81,10 @@ export const SliderCartpriceText = styled.p`
   font-size: 20px;
   font-weight: 700;
 `;
+
+export const SliderCartImgLink = styled(Link)`
+cursor: pointer;
+`
 
 export const SliderCartImgWrapper = styled.div`
   display: flex;

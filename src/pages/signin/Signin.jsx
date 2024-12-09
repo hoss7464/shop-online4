@@ -27,6 +27,7 @@ import {
 } from "../signup/SignupElements";
 import useGetData from "../../hook/useGetData";
 import { useNavigate } from "react-router-dom";
+import ScrollToTop from "../../core-ui/ScrollToTop"
 //---------------------------------------------------------------------------------------------------------
 
 const Signin = () => {
@@ -90,6 +91,7 @@ const Signin = () => {
 
   return (
     <>
+      <ScrollToTop />
       <SigninContainer>
         <SigninWrapper>
           <RegisterFormWrapper>

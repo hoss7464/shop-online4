@@ -11,17 +11,22 @@ import Dashboard from "./pages/dashboard/Dashboard.jsx";
 import Navbar from "./components/navbar/Navbar";
 import Sidebar from "./components/sidebar/Sidebar.jsx";
 import Footer from "./components/footer/Footer.jsx";
+import Details from "./pages/details/Details.jsx";
+import ScrollToTop from "./core-ui/ScrollToTop.js";
+
 
 
 function App() {
   return (
     <>
       <Router>
+        <ScrollToTop />
         <Navbar />
         <Sidebar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/product" element={<Product />} />
+          <Route path="/details" element={<Details />} />
           <Route path="/purchase" element={<Purchase />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
