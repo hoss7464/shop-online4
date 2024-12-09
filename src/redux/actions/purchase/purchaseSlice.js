@@ -37,7 +37,11 @@ export const purchaseSlice = createSlice({
   },
 });
 
-export const { addSelectedProduct, increaseQuantity, decreaseQuantity, removeSelectedProduct } =
-  purchaseSlice.actions;
+export const {
+  addSelectedProduct,
+  increaseQuantity,
+  decreaseQuantity,
+  removeSelectedProduct,
+} = purchaseSlice.actions;
 
 export default purchaseSlice.reducer;

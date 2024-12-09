@@ -14,7 +14,7 @@ export const SliderCartWrapper = styled.div`
 export const SliderCartBtnTextWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   margin-bottom: 1rem;
 `;

@@ -1,6 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  searchInputQueryFilter,
+  searchInputFilterClick,
+} from "../../redux/actions/filter/filterSlice";
+import {
   hoverEnableToggle,
   hoverDisableToggle,
   clickToggle,
@@ -36,6 +40,7 @@ import {
   HamburgerWrapper2,
   HamburgerIcon,
 } from "./NavbarElements";
+import { useNavigate } from "react-router-dom";
 import myHome1 from "../../assets/svg/Home1.svg";
 import myHome2 from "../../assets/svg/Home2.svg";
 import myPurchase1 from "../../assets/svg/Purchase1.svg";
@@ -43,13 +48,18 @@ import myPurchase2 from "../../assets/svg/Purchase2.svg";
 import myCategory1 from "../../assets/svg/Category1.svg";
 import myCategory2 from "../../assets/svg/Category2.svg";
 import Tooltip from "@mui/material/Tooltip";
+import Category from "../category/Category";
 //----------------------------------------------------------------------------------------------
 
 const Navbar = () => {
   //Selectors for toggle click :
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const toggles = useSelector((state) => state.toggle.toggles);
-  const selectedProducts = useSelector((state) => state.purchase.selectedProducts)
+  const selectedProducts = useSelector(
+    (state) => state.purchase.selectedProducts
+  );
+  const searchValue = useSelector((state) => state.filter.searchValue);
   const productCount = selectedProducts.length;
   //----------------------------------------------------------------------------------------------
   //Hover function :
@@ -60,6 +70,26 @@ const Navbar = () => {
     dispatch(hoverDisableToggle(id));
   };
   //----------------------------------------------------------------------------------------------
+  const handleSearchInputChange = (e) => {
+    dispatch(searchInputQueryFilter(e.target.value));
+  };
+
+  const handleSearchIconClick = () => {
+    if (searchValue.trim() !== "") { 
+      navigate("/product");
+      dispatch(searchInputFilterClick());
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (searchValue.trim() !== "") {
+        navigate("/product");
+        dispatch(searchInputFilterClick());
+      }
+    }
+  };
 
   return (
     <>
@@ -69,12 +99,18 @@ const Navbar = () => {
             <NavbarLogoWrapper>
               <NavbarLogo />
             </NavbarLogoWrapper>
+
             <SearchWrapper1>
-              <SearchIconWrapper>
+              <SearchIconWrapper onClick={handleSearchIconClick}>
                 <SearchIcon />
               </SearchIconWrapper>
               <SearchInputWrapper>
-                <SearchInput placeholder="search" />
+                <SearchInput
+                  placeholder="search"
+                  value={searchValue}
+                  onChange={handleSearchInputChange}
+                  onKeyDown={handleKeyPress}
+                />
               </SearchInputWrapper>
             </SearchWrapper1>
           </NavbarLeftSection>
@@ -94,7 +130,7 @@ const Navbar = () => {
                 </Tooltip>
               </Navlink>
 
-              <Navlink to="/purchase" >
+              <Navlink to="/purchase">
                 <Tooltip title="Purchase" placement="bottom">
                   <NavbarLinkIconWrapper
                     onMouseEnter={() => HoverMouseEnter("toggle2")}
@@ -108,20 +144,24 @@ const Navbar = () => {
                   </NavbarLinkIconWrapper>
                 </Tooltip>
               </Navlink>
-
-              <Navlink>
-                <Tooltip title="Category" placement="bottom">
-                  <NavbarLinkIconWrapper
-                    onMouseEnter={() => HoverMouseEnter("toggle3")}
-                    onMouseLeave={() => HoverMouseLeave("toggle3")}
-                  >
-                    <NavbarIcon
-                      alt="category icon"
-                      src={toggles["toggle3"] ? myCategory2 : myCategory1}
-                    />
-                  </NavbarLinkIconWrapper>
-                </Tooltip>
-              </Navlink>
+              {/*we must wrapp two components blow so that when we hover over category area it remains visible **/}
+              <div
+                onMouseEnter={() => HoverMouseEnter("toggle3")}
+                onMouseLeave={() => HoverMouseLeave("toggle3")}
+                style={{ position: "relative" }}
+              >
+                <Navlink>
+                  <Tooltip title="Category" placement="bottom">
+                    <NavbarLinkIconWrapper>
+                      <NavbarIcon
+                        alt="category icon"
+                        src={toggles["toggle3"] ? myCategory2 : myCategory1}
+                      />
+                    </NavbarLinkIconWrapper>
+                  </Tooltip>
+                </Navlink>
+                {toggles["toggle3"] && <Category />}
+              </div>
             </LinkWrpper1>
 
             <SignInUpWrapper>

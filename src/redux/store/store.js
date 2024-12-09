@@ -6,6 +6,7 @@ import usernameValidationReducer from "../actions/form/usernameValidationSlice"
 import phoneValidationReducr from "../actions/form/phoneValidationSlice"
 import passwordValidationReducer from "../actions/form/passwordValidationSlice"
 import purchaseReducer from "../actions/purchase/purchaseSlice"
+import filterReducer from "../actions/filter/filterSlice"
 //----------------------------------------------------------------------------------------------
 
 export const store = configureStore({
@@ -17,5 +18,6 @@ export const store = configureStore({
     phoneValidation : phoneValidationReducr,
     passwordValidation : passwordValidationReducer,
     purchase : purchaseReducer,
+    filter : filterReducer,
   },
 });
